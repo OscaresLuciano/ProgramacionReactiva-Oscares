@@ -1,0 +1,50 @@
+<mat-drawer-container class="example-container" autosize>
+  <!-- SIDEBAR -->
+
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <div class="image-container">
+      <img width="100" src="../../assets/img/avatar.png">
+    </div>
+    <div class="auth-name">
+      <p><b>{{ (authUserObs$ | async)?.email }}</b></p>
+    </div>
+
+    <p [appTitleFontSize]="20" class="mt-2">Secciones</p>
+    <ul *ngIf="showFiller">
+      <mat-list role="list">
+        <mat-list-item role="listitem"><a href="#">Alumnos</a></mat-list-item>
+        <mat-list-item role="listitem"><a href="#">Clases</a></mat-list-item>
+        <mat-list-item role="listitem"><a href="#">Cursos</a></mat-list-item>
+      </mat-list>
+    </ul>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      <span>{{ !showFiller ? "Mostrar secciones" : "Ocultar secciones" }}</span>
+    </button>
+  </mat-drawer>
+
+  <!-- WRAPPER -->
+
+  <div class="example-sidenav-content">
+    <!-- TOOLBAR -->
+
+    <mat-toolbar color="accent" class="relative">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="drawer.toggle()"
+        class="display-sidenav-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Programación Reactiva</span>
+      <span class="absolute right-0 pr-5"> {{ (authUserObs$ | async)?.email }} </span>
+    </mat-toolbar>
+
+    <!-- MAIN -->
+    <main>
+      <app-formularios></app-formularios>
+      <app-observables></app-observables>
+    </main>
+  </div>
+</mat-drawer-container>
